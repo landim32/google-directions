@@ -170,17 +170,17 @@ class GDLegInfo implements JsonSerializable
         if (isset($value->duration)) {
             $retorno->setDuration(GDValueInfo::fromJSON($value->duration));
         }
-        if (isset($value->end_address)) {
-            $retorno->setEndAddress($value->end_address);
-        }
-        if (isset($value->end_location)) {
-            $retorno->setEndLocation($value->end_location);
-        }
         if (isset($value->start_address)) {
             $retorno->setStartAddress($value->start_address);
         }
         if (isset($value->start_location)) {
-            $retorno->setStartLocation($value->start_location);
+            $retorno->setStartLocation(GDPositionInfo::fromJSON($value->start_location));
+        }
+        if (isset($value->end_address)) {
+            $retorno->setEndAddress($value->end_address);
+        }
+        if (isset($value->end_location)) {
+            $retorno->setEndLocation(GDPositionInfo::fromJSON($value->end_location));
         }
         $retorno->clearSteps();
         if (isset($value->steps)) {
