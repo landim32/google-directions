@@ -44,7 +44,7 @@ class GDPolylineInfo implements JsonSerializable
      */
     public static function fromJSON($value) {
         $polyline = new GDPolylineInfo();
-        $polyline->setPoints($value);
+        $polyline->setPoints($value->points);
         return $polyline;
     }
 }
