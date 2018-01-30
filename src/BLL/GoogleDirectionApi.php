@@ -16,6 +16,7 @@ class GoogleDirectionApi
 {
     private $api_key;
     private $origin;
+    private $waypoints = array();
     private $destination;
 
     const URL_MAP_API = "https://maps.googleapis.com/maps/api/directions/json";
@@ -62,6 +63,27 @@ class GoogleDirectionApi
     }
 
     /**
+     * Clear all Waypoints
+     */
+    public function clearWaypoints() {
+        $this->waypoints = array();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getWaypoints() {
+        return $this->waypoints;
+    }
+
+    /**
+     * @param string $value
+     */
+    public function addWaypoint($value) {
+        $this->waypoints[] = $value;
+    }
+
+    /**
      * @return string
      * @throws Exception
      */
@@ -70,6 +92,9 @@ class GoogleDirectionApi
         $params = array();
         $params["key"] = $this->api_key;
         $params["origin"] = $this->getOrigin();
+        if (count($this->getWaypoints()) > 0) {
+            $params["waypoints"] = "via:" . implode("|", $this->getWaypoints());
+        }
         $params["destination"] = $this->getDestination();
 
         $args = array();
